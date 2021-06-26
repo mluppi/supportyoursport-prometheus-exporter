@@ -1,0 +1,9 @@
+FROM arm64v8/adoptopenjdk:11-jre-hotspot-focal
+
+WORKDIR application
+RUN addgroup --system supportyoursport && adduser --system supportyoursport --ingroup supportyoursport
+USER supportyoursport:supportyoursport
+
+COPY target/*-jar-with-dependencies.jar ./supportyoursport.jar
+
+ENTRYPOINT ["java", "-jar", "supportyoursport.jar"]
